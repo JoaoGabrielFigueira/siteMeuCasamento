@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Presença | [Seu Nome] & [Parceiro(a)]</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="logo">
+            <h1>I & J</h1> 
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html#inicio">INÍCIO</a></li>
+                <li><a href="index.html#nossa-historia">NOSSA HISTÓRIA</a></li>
+                <li><a href="index.html#detalhes">DETALHES DO EVENTO</a></li>
+                <li><a href="rvsp.html">CONFIRMAR PRESENÇA</a></li> 
+                <li><a href="index.html#presentes">LISTA DE PRESENTES</a></li>
+                <li><a href="index.html#galeria">GALERIA</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="content" style="padding-top: 100px;">
+        
+        <section id="presenca" class="content-section">
+            <h2>Confirme Sua Presença</h2>
+            <p class="subtitle">Sua presença é o nosso maior presente! Por favor, confirme seu comparecimento até a data limite.</p>
+            
+            <div class="form-container">
+                <form id="rsvpForm"> 
+                    
+                    <div class="form-group">
+                        <label for="nome">Nome Completo do Convidado Principal:</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+        
+                    <div class="form-group">
+                        <label for="quantidade">Quantas pessoas na sua reserva?</label>
+                        <select id="quantidade" name="quantidade" required>
+                            <option value="1">Apenas eu (1)</option>
+                            <option value="2">Duas (2)</option>
+                            <option value="3">Três (3)</option>
+                            <option value="4">Quatro (4)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mensagem">Restrições alimentares ou observações:</label>
+                        <textarea id="mensagem" name="observacoes"></textarea>
+                    </div>
+        
+                    <button type="submit" class="rsvp-button">ENVIAR CONFIRMAÇÃO</button>
+                    <p id="formMessage" class="form-message"></p>
+                </form>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // O código do handleScroll() (header dinâmico) pode ser repetido aqui OU
+        // você pode simplesmente forçar o header a ser preto nesta página:
+        document.addEventListener('DOMContentLoaded', () => {
+             document.getElementById('main-header').classList.add('header-scrolled');
+        });
+    </script>
+</body>
+</html>

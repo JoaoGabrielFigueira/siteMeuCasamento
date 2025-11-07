@@ -1,0 +1,633 @@
+/* Configurações Globais e Reset */
+body {
+    font-family: 'Montserrat', sans-serif; 
+    margin: 0;
+    background-color: #f7f7f7; 
+    color: #333;
+}
+
+/* Adicione esta regra ao seu arquivo style.css */
+html {
+    scroll-behavior: smooth;
+}
+
+/* 1. ESTILO DO HEADER (Barra Superior Fixo) */
+#main-header {
+    height: 70px; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: transparent; 
+    box-shadow: none; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 100px;
+    box-sizing: border-box;
+    z-index: 1000;
+    margin-top: 15px;
+}
+
+.logo h1 {
+    font-size: 1.5em;
+    color: #ffffff; /* LOGO BRANCA */
+    margin: 0;
+    font-family: 'Montserrat', serif;
+    font-weight: 700;
+    margin-right: 20px;
+}
+
+#main-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Para alinhar os itens do menu horizontalmente */
+}
+
+#main-nav li {
+    margin-left: 20px; /* Espaço entre os itens do menu */
+}
+
+#main-nav a {
+    text-decoration: none;
+    color: #ffffff; 
+    font-weight: 400;
+    display: block;
+    padding: 3px 0;
+    position: relative;
+    font-family: 'Montserrat', serif; 
+    letter-spacing: 1px;
+    font-size: 1em;
+    transition: color 0.3s, font-family 0.3s; 
+}
+
+#main-nav a:hover {
+    font-family: 'Playfair Display', cursive; 
+    color: #ffffff;
+    font-size: 1em; /* Leve aumento de tamanho para destacar (opcional) */
+}
+
+/* 2. ESTILO DO CONTEÚDO PRINCIPAL (sem margin-left) */
+#content {
+    /* Removemos o 'margin-left: 250px;' */
+    width: 100%;
+    min-height: calc(100vh - 80px); /* Garante que o conteúdo ocupe a altura restante */
+}
+
+/* O estilo da seção 'full-screen' (INÍCIO) deve ser ajustado para levar em conta o header fixo */
+.full-screen {
+    height: 100vh; /* Subtrai a altura do header */
+    /* ... o restante do estilo permanece ... */
+}
+
+/* Seção de Início em Tela Cheia e Conteúdo Centralizado */
+.full-screen {
+    height: calc(100vh - 80px); /* Ajustado para o header */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative; /* Necessário para posicionar o overlay */
+    background-image: url('assets/sua-foto-de-fundo.jpg'); /* COLOQUE SUA IMAGEM AQUI */
+    background-size: cover;
+    background-position: center;
+    color: white; /* Cor do texto padrão para branco */
+}
+
+/* Camada escura sobre a imagem (overlay) */
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Escuro com 40% de opacidade */
+    z-index: 1; /* Abaixo do conteúdo */
+}
+
+/* Conteúdo principal (texto) da seção de início */
+.hero-content {
+    position: relative; /* Acima do overlay */
+    z-index: 2; 
+    /* Removemos o background-color e padding que existiam aqui */
+}
+
+
+.names {
+    font-family: 'Playfair Display', serif; /* Exemplo de fonte serifada elegante */
+    font-size: 5em; /* Ajuste o tamanho conforme a sua preferência */
+    margin: 0;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin-top: 20px;
+}
+
+
+.separator {
+    width: 80px;
+    height: 2px;
+    background-color: white;
+    margin: 20px auto; /* Centraliza a linha */
+}
+
+.hero-quote {
+    font-family: 'Playfair Display', serif; /* Mantém a mesma fonte elegante */
+    font-size: 1.4em;
+    font-style: italic;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.hero-date, .hero-location {
+    font-family: 'Montserrat', sans-serif; /* Exemplo de fonte */
+    font-size: 1.1em;
+    font-weight: 500;
+    letter-spacing: 2px;
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+
+
+/* Estilo geral para todas as seções de conteúdo (para não serem tela cheia) */
+.content-section {
+    padding: 20px 50px;
+    background-color: #ffffff; /* Fundo branco para seções de conteúdo */
+    max-width: 1000px; /* Limita a largura do conteúdo para melhor leitura */
+    margin: 0 auto; /* Centraliza a seção */
+}
+
+.content-section h2 {
+    text-align: center;
+    font-size: 3em;
+    color: #000000;
+    margin-bottom: 5px;
+    font-family: 'Playfair Display', sans-serif; 
+    margin-top: 150px;
+}
+
+.content-section .subtitle {
+    text-align: center;
+    font-size: 1.2em;
+    color: #666;
+    margin-bottom: 50px;
+    font-family: 'Montserrat', sans-serif; 
+
+}
+
+/* Estilos do Container da Timeline */
+.timeline-container {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Linha central da Timeline */
+.timeline-container::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    background-color: #cccccc; /* Cor da linha vertical */
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+}
+
+/* Estilo para cada item da Timeline */
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+    box-sizing: border-box;
+}
+
+/* O círculo/ponto em cada item */
+.timeline-item::after {
+    content: '';
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -13px;
+    background-color: #000000; /* Cor do ponto */
+    border: 4px solid #fff;
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1; /* Para ficar acima da linha */
+}
+
+/* Posicionamento dos itens da esquerda */
+.left {
+    left: 0;
+}
+
+/* Posicionamento dos itens da direita */
+.right {
+    left: 50%;
+}
+
+/* Ajuste o ponto para os itens da direita */
+.right::after {
+    left: -13px;
+}
+
+/* Estilo do bloco de conteúdo */
+.timeline-content {
+    padding: 20px 30px;
+    background-color: transparent;
+    position: relative;
+    border-radius: 6px;
+}
+
+.timeline-content h3 {
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 0;
+    color: #333;
+    font-size: 1.5em;
+}
+
+.timeline-content .date {
+    color: #999;
+    font-style: italic;
+    display: block;
+    margin-bottom: 10px;
+}
+
+/* Seta apontando para a linha central (Item Esquerdo) */
+.left .timeline-content::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    right: -15px;
+    border: medium solid #f7f7f7;
+    border-width: 10px 0 10px 15px;
+    border-color: transparent transparent transparent #f7f7f7;
+}
+
+/* Seta apontando para a linha central (Item Direito) */
+.right .timeline-content::before {
+    content: " ";
+    height: 0;
+    position: absolute;
+    top: 22px;
+    width: 0;
+    z-index: 1;
+    left: -15px;
+    border: medium solid #f7f7f7;
+    border-width: 10px 15px 10px 0;
+    border-color: transparent #f7f7f7 transparent transparent;
+}
+
+/* Container de Opções em Grade (GRID) */
+.gifts-grid {
+    display: grid;
+    /* 4 colunas em telas grandes */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 25px;
+    margin: 40px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+/* Estilo de cada Card */
+.gift-card {
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid #eee;
+    transition: transform 0.3s;
+    /* Garante altura uniforme para todos os cards */
+    display: flex; 
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.gift-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gift-icon {
+    font-size: 3em;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.gift-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #6a0dad;
+    margin-top: 0;
+}
+
+.gift-card p {
+    line-height: 1.5;
+    flex-grow: 1; /* Faz o parágrafo ocupar o espaço restante */
+}
+
+/* O botão já deve ter o estilo 'gift-button' criado anteriormente */
+
+/* Estilos para telas menores (Responsividade) */
+@media (max-width: 1024px) {
+    .gifts-grid {
+        /* Em telas médias, 2 colunas */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 600px) {
+    .gifts-grid {
+        /* Em telas pequenas, 1 coluna */
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* Container Flexível para Detalhes */
+.details-flex-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin: 40px auto;
+    max-width: 900px;
+}
+
+.detail-card {
+    flex: 1;
+    text-align: center;
+    padding: 30px 15px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border-top: 5px solid #6a0dad; /* Linha de destaque */
+}
+
+.detail-icon {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.detail-card h3 {
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    font-size: 1.2em;
+    margin-top: 0;
+}
+
+.detail-card p {
+    font-size: 0.95em;
+    line-height: 1.6;
+}
+
+/* Estilos de Localização (Mapa) */
+.location-info {
+    margin-top: 60px;
+    padding: 30px 0;
+    text-align: center;
+}
+
+.location-title {
+    font-size: 1.8em;
+    color: #6a0dad;
+    margin-bottom: 20px;
+}
+
+.map-details {
+    max-width: 700px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    text-align: left;
+}
+
+.map-details p {
+    margin-bottom: 15px;
+}
+
+/* Botão de Navegação */
+.detail-button {
+    background-color: #6a0dad;
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.detail-button:hover {
+    background-color: #520885;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .details-flex-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+/* Estilo do Container da Galeria (GRID) */
+.photo-grid {
+    /* Layout de 3 colunas em telas grandes */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 15px; /* Espaço entre as fotos */
+    margin: 40px auto;
+    max-width: 1200px;
+    padding: 0 20px;
+}
+
+/* Estilo para cada item da Galeria */
+.photo-item {
+    overflow: hidden; /* Garante que a imagem não saia do limite */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover {
+    transform: scale(1.03); /* Zoom leve ao passar o mouse */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+.photo-item img {
+    width: 100%; /* Ocupa a largura total do container */
+    height: 100%; /* Ocupa a altura total */
+    object-fit: cover; /* Recorta a imagem para cobrir a área, sem distorcer */
+    display: block;
+    transition: opacity 0.5s;
+}
+
+/* Responsividade: Mudança de layout conforme o tamanho da tela */
+@media (max-width: 1024px) {
+    .photo-grid {
+        /* Em telas médias, 2 colunas */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-grid {
+        /* Em telas pequenas (celular), 1 coluna */
+        grid-template-columns: 1fr; 
+    }
+}
+
+/* 3. ESTILO DO COUNTDOWN */
+
+.countdown-timer {
+    display: flex; /* ESSA PROPRIEDADE COLOCA OS BLOCOS LADO A LADO */
+    justify-content: center; /* Centraliza o grupo de blocos */
+    gap: 30px; /* Aumenta o espaçamento entre os blocos (opcional) */
+    margin-bottom: 10px;
+}
+/* ... O restante dos estilos para .timer-box, span e small permanecem os mesmos ... */
+
+.timer-box {
+    /* REMOÇÃO DOS QUADRADOS E FUNDOS: */
+    background-color: transparent; /* Fundo transparente */
+    border: none; /* Sem borda */
+    /* FIM DA REMOÇÃO */
+    
+    color: white; /* Mantém o texto branco */
+    padding: 0; /* Remove o padding, deixando o conteúdo mais compacto */
+    min-width: 60px; /* Reduz a largura mínima, já que não há padding */
+}
+
+.timer-box span {
+    display: block;
+    font-size: 2.2em; /* Um pouco maior para compensar a falta do quadrado */
+    font-weight: 700;
+    line-height: 1;
+    font-family: 'Bodoni Moda', serif; 
+}
+
+.timer-box small {
+    display: block;
+    font-size: 0.8em; /* Levemente maior */
+    margin-top: 5px;
+    text-transform: uppercase;
+    font-family: 'Bodoni Moda', serif;
+    letter-spacing: 1px;
+}
+
+/* Estilo para a Div de Transição */
+.transition-divider {
+    width: 100%;
+    /* Ajuste a altura se necessário, ou deixe que a imagem defina */
+    height: auto; 
+    overflow: hidden; /* Garante que a imagem não transborde */
+    margin-top: -130px; /* PUXA PARA CIMA para sobrepor a borda da seção anterior */
+    margin-bottom: -10px; /* PUXA PARA CIMA para sobrepor a borda da seção seguinte */
+    position: relative;
+    z-index: 5; /* Garante que ela fique acima das bordas das seções */
+    background-color: transparent; /* Para garantir que não haja fundo sólido */
+}
+
+.transition-divider img {
+    width: 100%;
+    height: auto;
+    display: block; /* Remove espaços extras abaixo da imagem */
+}
+
+.header-scrolled {
+    background-color: #000000 !important; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
+    height: 70px !important;
+    width: 100% !important;
+    padding: 0 100px !important; 
+    align-items: center !important;
+    transition: background-color 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
+    margin-top: 0px !important;
+    
+}
+
+/* Garante que os links continuem brancos (ou mude a cor se necessário) */
+.header-scrolled a {
+    color: #ffffff !important;
+}
+
+/* Container Flexbox para o Layout de 3 Colunas */
+.phases-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 50px auto;
+    max-width: 1200px;
+}
+
+.phase-item {
+    flex-basis: 300px; /* Largura base para cada coluna */
+    text-align: center;
+}
+
+/* 1. Efeito da Imagem (Oval/Curva) */
+/* wrapper que mantém o recorte da imagem */
+.phase-image-wrap {
+    position: relative;
+    width: 280px;
+    height: 400px;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    border-radius: 140px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    z-index: 1;
+    margin-top: 100px;
+    margin-bottom: 60px; /* espaço para o número visível abaixo */
+    overflow: visible; /* permite que o número extrapole para fora */
+}
+
+/* inner para realmente recortar a imagem com borda arredondada */
+.phase-image-inner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* recorta a imagem */
+    border-radius: 140px; /* mesmo raio da .phase-image-wrap */
+    border: 5px solid #ffffff;
+    box-sizing: border-box;
+}
+
+/* imagem dentro do inner (preenchendo e recortando) */
+.phase-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform-origin: center;
+}
+
+/* número posicionado no canto direito embaixo, metade sobre a imagem e metade fora */
+.phase-number {
+    position: absolute;
+    right: -24px;   /* desloca para a direita (ajuste fino conforme necessidade) */
+    bottom: -24px;  /* desloca para baixo (parte fora) */
+    font-size: 110px;
+    line-height: 1;
+    font-weight: 300;
+    font-family: "Playfair Display", serif;
+    color: #000;
+    z-index: 10;    /* acima da imagem */
+    text-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    pointer-events: none;
+}
+
+/* responsivo: reduz o número e o deslocamento em telas menores */
+@media (max-width: 900px) {
+    .phase-image-wrap { width: 240px; height: 340px; border-radius: 120px; margin-bottom: 50px; }
+    .phase-image-inner { border-radius: 120px; }
+    .phase-number { font-size: 88px; right: -22px; bottom: -22px; }
+}
+
+@media (max-width: 480px) {
+    .phase-image-wrap { width: 200px; height: 280px; border-radius: 100px; margin-bottom: 44px; }
+    .phase-image-inner { border-radius: 100px; }
+    .phase-number { font-size: 64px; right: -16px; bottom: -16px; }
+}
