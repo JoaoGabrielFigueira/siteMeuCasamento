@@ -2,7 +2,7 @@
 body {
     font-family: 'Montserrat', sans-serif; 
     margin: 0;
-    background-color: #f7f7f7; 
+    background-color: #ffffff; 
     color: #333;
 }
 
@@ -28,13 +28,29 @@ html {
     margin-top: 15px;
 }
 
+/* Remove o estilo h1, se você o removeu do HTML */
 .logo h1 {
-    font-size: 1.5em;
-    color: #ffffff; /* LOGO BRANCA */
-    margin: 0;
-    font-family: 'Montserrat', serif;
-    font-weight: 700;
-    margin-right: 20px;
+    display: none; /* Ou apenas remova este bloco se você tirou o <h1> */
+}
+
+/* Adicione/ajuste o estilo para a nova imagem */
+.site-logo {
+    /* Define a altura máxima para se encaixar bem na sua navbar */
+    max-height: 100px; 
+    width: auto;
+    display: block;
+    /* Adiciona transição para o hover se quiser algum efeito */
+    transition: opacity 0.3s;
+    filter: invert(100%);
+}
+
+/* Garante que o container do logo tenha a altura correta */
+.logo {
+    /* Remove a margem direita que era para separar o h1 do menu */
+    /* Garante alinhamento vertical */
+    display: flex;
+    align-items: center;
+    margin-left: -70px;
 }
 
 #main-nav ul {
@@ -207,7 +223,7 @@ html {
     position: absolute;
     width: 25px;
     height: 25px;
-    right: -13px;
+    right: -15px;
     background-color: #000000; /* Cor do ponto */
     border: 4px solid #fff;
     top: 15px;
@@ -239,7 +255,7 @@ html {
 }
 
 .timeline-content h3 {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Playfair Display', sans-serif;
     margin-top: 0;
     color: #333;
     font-size: 1.5em;
@@ -631,3 +647,284 @@ html {
     .phase-image-inner { border-radius: 100px; }
     .phase-number { font-size: 64px; right: -16px; bottom: -16px; }
 }
+
+/* Container da Seção de Chamada para Ação (Dois Lados) */
+.call-to-action-section {
+    display: flex;
+    width: 100%;
+    height: 100vh; /* Define uma altura para os cards ocuparem bem a tela */
+    min-height: 400px;
+    margin: 0;
+    padding: 0;
+}
+
+.cta-card {
+    flex: 1; /* Garante que cada card ocupe 50% da largura */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 40px;
+    color: white; 
+    position: relative;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s;
+}
+
+.cta-card:hover {
+    transform: scale(1.02); /* Leve zoom no hover */
+}
+
+/* ------------------------------------------- */
+/* NOVO OVERLAY (Para escurecer a imagem) */
+/* ------------------------------------------- */
+.cta-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Overlay Preto Sólido (50% de opacidade) */
+    background-color: rgba(0, 0, 0, 0.5); 
+    z-index: 1;
+}
+
+/* Garante que o conteúdo fique acima do overlay */
+.cta-title, .cta-text, .cta-button {
+    position: relative;
+    z-index: 2;
+}
+
+/* ------------------------------------------- */
+/* IMAGENS DE FUNDO ESPECÍFICAS */
+/* ------------------------------------------- */
+
+/* CARD 1: RSVP */
+.rsvp-card {
+    background-image: url('assets/flor-de-petalas-brancas.jpg'); 
+}
+
+/* CARD 2: PRESENTES */
+.gifts-card {
+    background-image: url('assets/foto-de-close-up-de-foco-seletivo-de-uma-flor-rosa.jpg'); 
+}
+
+/* CARD 1: RSVP (Fundo Contraste Escuro) */
+.rsvp-card {
+    background-color: #000000; /* Preto Sólido */
+    color: white;
+}
+
+/* CARD 2: PRESENTES (Fundo Claro) */
+.gifts-card {
+    background-color: #f7f7f7; /* Cinza Muito Claro/Quase Branco */
+    color: #000000;
+}
+
+/* Estilo dos Textos */
+.cta-title {
+    font-family: 'Montserrat', serif;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.cta-text {
+    font-family: 'Montserrat', serif;
+    font-size: 1.1em;
+    max-width: 80%;
+    margin-bottom: 30px;
+}
+
+/* Estilo dos Botões (Usando o padrão Preto/Branco) */
+.cta-button {
+    text-decoration: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    font-family: 'Montserrat', serif;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    border: 2px solid;
+}
+
+/* Botão no Card Preto (Fundo Branco com Borda Preta) */
+.primary-cta-button {
+    background-color: white;
+    color: #000000;
+    border-color: white;
+}
+.primary-cta-button:hover {
+    background-color: #cccccc; /* Cinza claro no hover */
+    border-color: #cccccc;
+}
+
+/* Botão no Card Claro (Fundo Preto com Borda Preta) */
+.secondary-cta-button {
+    background-color: #000000;
+    color: white;
+    border-color: #000000;
+}
+.secondary-cta-button:hover {
+    background-color: #333333; /* Cinza escuro no hover */
+    border-color: #333333;
+}
+
+/* Responsividade: Empilhar em telas pequenas */
+@media (max-width: 768px) {
+    .call-to-action-section {
+        flex-direction: column;
+        height: auto;
+        min-height: 800px;
+    }
+    .cta-card {
+        height: 50vh;
+    }
+}
+
+/* --- ESTILOS: DETALHES DO EVENTO --- */
+
+/* Título Secundário (Para manter o padrão Bodoni Moda) */
+.section-title-alt {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 3em;
+    font-weight: 500;
+    text-align: center;
+    color: #000000;
+    margin-bottom: 50px;
+    padding-top: 50px;
+}
+
+/* Container do Grid de Detalhes (3 Colunas) */
+.event-details-grid {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 50px auto;
+    padding: 0 20px;
+}
+
+/* Card Individual de Detalhe */
+.detail-card {
+    flex: 1;
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid #e0e0e0; /* Borda sutil */
+    background-color: #ffffff; /* Fundo branco */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Sombra suave */
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.detail-card:hover {
+    transform: translateY(-5px); /* Efeito de elevação sutil */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Ícone de Detalhe */
+.detail-icon {
+    font-size: 2.5em;
+    display: block;
+    margin-bottom: 15px;
+    color: #000000;
+}
+
+/* Título do Card (Bodoni Moda) */
+.detail-title {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+/* Subtítulo/Descrição (Bodoni Moda Itálico) */
+.detail-subtitle {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 0.9em;
+    font-style: italic;
+    color: #666666;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    padding-bottom: 15px;
+}
+
+/* Informação Principal (Bodoni Moda) */
+.detail-info p {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 1em;
+    line-height: 1.6;
+    color: #333333;
+}
+
+/* Link de Ação (Botão em Preto) */
+.detail-action-link {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 15px;
+    background-color: #000000;
+    color: white;
+    text-decoration: none;
+    font-family: 'Bodoni Moda', serif;
+    font-size: 0.85em;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+.detail-action-link:hover {
+    background-color: #333333;
+}
+
+/* Estilo do Container do Mapa */
+.event-map-container {
+    max-width: 800px;
+    margin: 50px auto 80px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.event-map-container h4 {
+    font-family: 'Bodoni Moda', serif;
+    font-size: 1.8em;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+/* Placeholder ou Embed Real do Mapa */
+.map-placeholder {
+    width: 100%;
+    height: 400px;
+    background-color: #f0f0f0;
+    border: 1px solid #cccccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Bodoni Moda', serif;
+    color: #999999;
+    font-size: 1.2em;
+}
+
+.map-placeholder iframe {
+    /* Certifica que o mapa embedado ocupe todo o espaço */
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* Responsividade: Empilhar em telas menores */
+@media (max-width: 768px) {
+    .event-details-grid {
+        flex-direction: column;
+        gap: 20px;
+    }
+    .detail-card {
+        width: 90%;
+        margin: 0 auto;
+    }
+}
+

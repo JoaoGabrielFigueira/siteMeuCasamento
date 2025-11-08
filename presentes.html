@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presentes | Isabela & João</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <header id="main-header">
+        <div class="logo">
+            <img src="assets/sua-logo.png" alt="Monograma do Casal" class="site-logo"> 
+        </div>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="index.html#inicio">INÍCIO</a></li>
+                <li><a href="index.html#nossa-historia">NOSSA HISTÓRIA</a></li>
+                <li><a href="index.html#momentos-marcantes">MOMENTOS</a></li>
+                <li><a href="rsvp.html">CONFIRMAR PRESENÇA</a></li> 
+                <li><a href="presentes.html">LISTA DE PRESENTES</a></li> 
+                <li><a href="index.html#galeria">GALERIA</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="content" style="padding-top: 100px;">
+        
+        <section id="presentes" class="content-section">
+            <h2>Lista de Presentes</h2>
+            <p class="subtitle">Sua presença é o nosso maior presente! Se quiser nos ajudar a construir nosso sonho, escolha uma cota abaixo:</p>
+            
+            <div class="gifts-grid">
+                
+                <div class="gift-card">
+                    <span class="gift-icon">☕</span>
+                    <h3>Nosso Primeiro Café da Manhã</h3>
+                    <p>Um momento especial para celebrarmos o dia seguinte! (Cota de R$ 50)</p>
+                    <a href="[LINK DE PAGAMENTO AQUI - R$ 50]" target="_blank" class="gift-button">Contribuir com R$ 50</a>
+                </div>
+
+                <div class="gift-card">
+                    <span class="gift-icon">🍽️</span>
+                    <h3>Jantar Romântico na Lua de Mel</h3>
+                    <p>Ajude a financiar um jantar inesquecível em [Local da Lua de Mel]. (Cota de R$ 150)</p>
+                    <a href="[LINK DE PAGAMENTO AQUI - R$ 150]" target="_blank" class="gift-button">Contribuir com R$ 150</a>
+                </div>
+                
+                <div class="gift-card">
+                    <span class="gift-icon">🏖️</span>
+                    <h3>Passeio de Barco na Viagem</h3>
+                    <p>Uma experiência de aventura para a nossa lua de mel. (Cota de R$ 300)</p>
+                    <a href="[LINK DE PAGAMENTO AQUI - R$ 300]" target="_blank" class="gift-button">Contribuir com R$ 300</a>
+                </div>
+                
+                <div class="gift-card">
+                    <span class="gift-icon">💖</span>
+                    <h3>Presente de Livre Escolha</h3>
+                    <p>Se preferir, nos presenteie com o valor que seu coração mandar. (PIX)</p>
+                    <button class="gift-button pix-copy-button" data-pix-key="[SUA CHAVE PIX AQUI]">
+                        Copiar Chave PIX
+                    </button>
+                </div>
+
+            </div>
+            <p class="gifts-note">O valor arrecadado será usado integralmente em [Seu Destino] ou em nosso novo lar. Muito obrigado!</p>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+    <script>
+        // Força o header a ser preto nesta página (como fizemos no rsvp.html)
+        document.addEventListener('DOMContentLoaded', () => {
+             document.getElementById('main-header').classList.add('header-scrolled');
+        });
+    </script>
+</body>
+</html>
