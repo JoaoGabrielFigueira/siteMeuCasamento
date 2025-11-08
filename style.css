@@ -178,7 +178,7 @@ html {
     color: #000000;
     margin-bottom: 5px;
     font-family: 'Playfair Display', sans-serif; 
-    margin-top: 150px;
+    margin-top: 60px; /* antes: 150px — reduzido */
 }
 
 .content-section .subtitle {
@@ -607,7 +607,7 @@ html {
     height: 100%;
     overflow: hidden; /* recorta a imagem */
     border-radius: 140px; /* mesmo raio da .phase-image-wrap */
-    border: 5px solid #ffffff;
+    border: 5px solid #b8b2b2;
     box-sizing: border-box;
 }
 
@@ -710,19 +710,55 @@ html {
 
 /* CARD 2: PRESENTES */
 .gifts-card {
-    background-image: url('assets/foto-de-close-up-de-foco-seletivo-de-uma-flor-rosa.jpg'); 
+    background-image: url('assets/foto-de-close-up-de-foco-seletivo-de-uma-flor-rosa.jpg');
+    background-size: cover;
+    background-position: center;
+    background-color: #f7f7f7;
+    color: #ffffff; /* texto branco */
+    position: relative; /* necessário para o overlay */
+    overflow: hidden;
 }
 
-/* CARD 1: RSVP (Fundo Contraste Escuro) */
-.rsvp-card {
-    background-color: #000000; /* Preto Sólido */
-    color: white;
+/* overlay para legibilidade do texto sobre a imagem clara */
+.gifts-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45); /* ajuste a opacidade conforme necessário */
+    z-index: 1;
 }
 
-/* CARD 2: PRESENTES (Fundo Claro) */
-.gifts-card {
-    background-color: #f7f7f7; /* Cinza Muito Claro/Quase Branco */
+/* garante que conteúdo fique acima do overlay e com cor branca */
+.gifts-card .cta-title,
+.gifts-card .cta-text,
+.gifts-card .cta-button {
+    position: relative;
+    z-index: 2;
+    color: #ffffff;
+}
+
+/* botão específico do card de presentes — igual ao botão de confirmar presença */
+.gifts-card .secondary-cta-button {
+    background-color: #ffffff;
     color: #000000;
+    border-color: #ffffff;
+    padding: 12px 25px;
+    font-weight: bold;
+    font-family: 'Montserrat', serif;
+    letter-spacing: 1px;
+    border-radius: 3px;
+    text-decoration: none;
+    display: inline-block;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    position: relative;
+    z-index: 2; /* acima do overlay */
+}
+
+/* hover igual ao do confirmar presença */
+.gifts-card .secondary-cta-button:hover {
+    background-color: #cccccc; /* cinza claro */
+    color: #000000;
+    border-color: #cccccc;
 }
 
 /* Estilo dos Textos */
@@ -795,7 +831,7 @@ html {
     text-align: center;
     color: #000000;
     margin-bottom: 50px;
-    padding-top: 50px;
+    padding-top: 20px; /* antes: 50px — reduzido */
 }
 
 /* Container do Grid de Detalhes (3 Colunas) */
@@ -883,7 +919,7 @@ html {
 /* Estilo do Container do Mapa */
 .event-map-container {
     max-width: 800px;
-    margin: 50px auto 80px auto;
+    margin: 50px auto 20px auto;
     padding: 0 20px;
     text-align: center;
 }
@@ -909,22 +945,144 @@ html {
     font-size: 1.2em;
 }
 
-.map-placeholder iframe {
-    /* Certifica que o mapa embedado ocupe todo o espaço */
+/* garante que o iframe do mapa ocupe o espaço corretamente */
+.event-map-container .map-wrap {
     width: 100%;
-    height: 100%;
-    border: none;
+    height: 380px;
+    overflow: hidden;
+    border-radius: 12px;
 }
 
-/* Responsividade: Empilhar em telas menores */
-@media (max-width: 768px) {
-    .event-details-grid {
-        flex-direction: column;
-        gap: 20px;
+.event-map-container .map-wrap iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+}
+
+/* responsivo: mapa menor em telas pequenas */
+@media (max-width: 980px) {
+    .event-map-container .map-wrap { height: 260px; }
+}
+@media (max-width: 480px) {
+    .event-map-container .map-wrap { height: 200px; }
+}
+
+/* Estilo: página de Detalhes do Evento (salão + dress code) */
+.event-page .container { max-width: 1100px; margin: 0 auto; padding: 56px 20px; }
+
+.event-page-header { text-align: center; margin-bottom: 28px; color: #222; }
+.event-page-header .lead { color:#6b6b6b; margin-top:8px; }
+
+/* layout principal: duas colunas (salão à esquerda, dresscode à direita) */
+.event-row {
+    display: grid;
+    grid-template-columns: 1fr 480px; /* aumentei a coluna da direita para a foto */
+    gap: 36px;
+    align-items: center; /* centraliza verticalmente a foto em relação ao texto */
+    margin-bottom: 28px;
+}
+
+/* Lado do texto: centraliza verticalmente os 3 parágrafos */
+.event-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* centraliza os parágrafos verticalmente */
+    gap: 18px; /* espaço entre parágrafos */
+    color: #222;
+    line-height: 1.7;
+}
+
+/* Lado da foto: centra a figura e aumenta o tamanho máximo */
+.event-photo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* aumenta o tamanho da figura do salão sem quebrar o layout */
+.venue-figure {
+    width: 100%;
+    max-width: 460px;
+    border-radius: 12px;
+    overflow: hidden; /* volta a cortar a imagem nas bordas */
+    box-shadow: 0 12px 30px rgba(0,0,0,0.06);
+    position: relative;
+    border: 6px solid rgba(255,255,255,1); /* borda da imagem */
+    box-sizing: border-box;
+}
+
+/* garante que a imagem preencha corretamente o container */
+.venue-image {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Data vertical (agora com números juntos) */
+.wedding-date-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0;  /* remove espaço entre números */
+    height: 100%;
+    min-height: 240px;
+}
+
+.wedding-date-vertical .wd-part {
+    font-family: 'Playfair Display', serif;
+    font-size: 120px;
+    font-weight: 300;
+    font-style: italic;
+    color: #000000;
+    line-height: 0.9; /* aproxima os números verticalmente */
+    display: block;
+    text-align: center;
+    letter-spacing: -2px;
+}
+
+/* responsivo */
+@media (max-width: 980px) {
+    .wedding-date-vertical .wd-part {
+        font-size: 100px;
     }
-    .detail-card {
-        width: 90%;
-        margin: 0 auto;
+}
+
+@media (max-width: 480px) {
+    .wedding-date-vertical .wd-part {
+        font-size: 80px;
     }
+}
+
+/* Footer minimalista */
+.site-footer {
+    background-color: #000000;
+    padding: 15px 0;  /* reduzido de 20px */
+    text-align: center;
+    margin-top: 20px;  /* reduzido de 60px */
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-signature {
+    font-family: 'Playfair Display', serif;  /* fonte mais elegante */
+    font-size: 12px;  /* reduzido de 14px */
+    font-weight: 300;  /* mais leve */
+    font-style: italic;
+    color: #ffffff;
+    letter-spacing: 1.5px;  /* ajustado de 2px */
+}
+
+/* reduz espaço do mapa */
+.event-map-container {
+    margin-bottom: 20px;  /* reduzido de 80px */
 }
 

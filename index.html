@@ -156,55 +156,62 @@
             </div>
         
         </section>
-        <section id="detalhes-do-evento" class="content-section">
-            <h2 class="section-title-alt">Detalhes do Evento</h2>
-            
-            <div class="event-details-grid">
-                
-                <div class="detail-card time-card">
-                    <span class="detail-icon">📅</span>
-                    <h3 class="detail-title">Data e Horário</h3>
-                    <p class="detail-subtitle">Sua agenda é o nosso maior presente</p>
-                    <div class="detail-info">
-                        <p>29 de Junho de 2024</p>
-                        <p>Início às 16:00h</p>
-                    </div>
-                    <a href="javascript:void(0);" class="detail-action-link">Adicionar ao Calendário</a>
-                </div>
-                
-                <div class="detail-card location-card">
-                    <span class="detail-icon">📍</span>
-                    <h3 class="detail-title">Local da Cerimônia e Festa</h3>
-                    <p class="detail-subtitle">Um lugar para celebrar o amor</p>
-                    <div class="detail-info">
-                        <p>Espaço [Nome do Espaço]</p>
-                        <p>[Endereço, Cidade, Estado]</p>
-                    </div>
-                    <a href="[LINK PARA GOOGLE MAPS DA CERIMÔNIA]" target="_blank" class="detail-action-link">Ver no Mapa</a>
-                </div>
-                
-                <div class="detail-card dresscode-card">
-                    <span class="detail-icon">👔</span>
-                    <h3 class="detail-title">Traje</h3>
-                    <p class="detail-subtitle">Sugerimos um toque de elegância</p>
-                    <div class="detail-info">
-                        <p>Esporte Fino ou Social</p>
-                        <p>Cores Claras e Neutras são bem-vindas</p>
-                    </div>
-                    <a href="javascript:void(0);" class="detail-action-link">Dicas de Estilo</a>
-                </div>
-            </div>
-            
-            <div id="event-map" class="event-map-container">
-                <h4>Como Chegar ao Local</h4>
-                <div class="map-placeholder">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.403625874588!2d-46.61450342584449!3d-23.553942961317453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5978b784e171%3A0x89d7e4afddbbbcd9!2sVillaggio%20Europeo!5e0!3m2!1spt-BR!2sbr!4v1762556656967!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-            </div>
-        </section>
+        <section id="detalhes-do-evento" class="content-section event-page">
+  <div class="container">
+    <header class="event-page-header">
+      <h2 class="section-title-alt">Detalhes do Salão & Traje</h2>
+      <p class="lead">Tudo que você precisa saber para o dia — logística, ambiente e recomendações práticas.</p>
+    </header>
+
+    <div class="event-row">
+      <!-- Lado esquerdo: texto único com 3 parágrafos -->
+      <div class="event-text">
+        <p>
+          O evento será realizado no Espaço Villaggio, um salão climatizado com área coberta e entrada acessível. Haverá estacionamento no local e serviço de manobrista em dias de grande movimento; por isso, sugerimos planejar a chegada com antecedência. A cerimônia começa às 18:00, com recepção logo em seguida — a equipe do salão garante apoio para montagem, som e iluminação.
+        </p>
+
+        <p>
+          Durante a recepção teremos coquetel e jantar servidos em estações, além de bar completo. Caso tenha restrições alimentares, por favor nos informe com antecedência para que possamos providenciar opções apropriadas. A proposta do lugar é um clima acolhedor e elegante: mesas espaçadas, pista de dança central e área de descanso para convidados que preferirem um ambiente mais calmo.
+        </p>
+
+        <p>
+          Para o traje sugerimos esporte fino / social — tecidos leves e cores neutras combinam com a proposta. Evite peças excessivamente casuais (shorts, camisetas esportivas). Para dúvidas sobre acessibilidade, transporte ou confirmação de presença, entre em contato com a coordenação pelo telefone indicado na página RSVP.
+        </p>
+      </div>
+
+      <!-- Lado direito: substitui a imagem por data vertical -->
+      <aside class="event-photo">
+    <div class="wedding-date-vertical">
+        <span class="wd-part">01</span>
+        <span class="wd-part">03</span>
+        <span class="wd-part">26</span>
+    </div>
+</aside>
+    </div>
+
+    <!-- Mapa ou outra informação pode ficar abaixo, se desejar -->
+    <div class="event-map-container">
+      <div class="map-wrap">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.403625874588!2d-46.61450342584449!3d-23.553942961317453!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce5978b784e171%3A0x89d7e4afddbbbcd9!2sVillaggio%20Europeo!5e0!3m2!1spt-BR!2sbr!4v1762556656967!5m2!1spt-BR!2sbr"
+          width="100%"
+          height="380"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
         </main>
 
-    <script src="script.js"></script>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span class="footer-signature">by isabela & joão</span>
+        </div>
+    </footer>
 
+    <script src="script.js"></script>
 </body>
 </html>
