@@ -1,80 +1,408 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Presentes | Isabela & João</title>
-    <link rel="stylesheet" href="style.css"> 
-    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400..900;1,400..900&family=Great+Vibes&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Lista de Presentes | Isabela & João</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="page-presents">
+  <!-- Substitua o header atual por este (mesmo markup da página inicial) -->
+  <header id="main-header">
+    <div class="container">
+      <div class="logo">
+        <a href="index.html">
+          <img src="assets/logo.png" alt="Isabela & João" class="site-logo">
+        </a>
+      </div>
 
-    <header id="main-header">
-        <div class="logo">
-            <img src="assets/sua-logo.png" alt="Monograma do Casal" class="site-logo"> 
-        </div>
-        <nav id="main-nav">
-            <ul>
-                <li><a href="index.html#inicio">INÍCIO</a></li>
-                <li><a href="index.html#nossa-historia">NOSSA HISTÓRIA</a></li>
-                <li><a href="index.html#momentos-marcantes">MOMENTOS</a></li>
-                <li><a href="rsvp.html">CONFIRMAR PRESENÇA</a></li> 
-                <li><a href="presentes.html">LISTA DE PRESENTES</a></li> 
-                <li><a href="index.html#galeria">GALERIA</a></li>
-            </ul>
-        </nav>
-    </header>
+      <nav id="main-nav">
+        <ul>
+          <li><a href="index.html">INÍCIO</a></li>
+          <li><a href="index.html#nossa-historia">NOSSA HISTÓRIA</a></li>
+          <li><a href="index.html#detalhes-do-evento">DETALHES DO EVENTO</a></li>
+          <li><a href="rvsp.html">CONFIRMAR PRESENÇA</a></li>
+          <li><a href="presentes.html" class="active">LISTA DE PRESENTES</a></li>
+          <li><a href="index.html#galeria">GALERIA</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <main id="content" style="padding-top: 100px;">
-        
-        <section id="presentes" class="content-section">
-            <h2>Lista de Presentes</h2>
-            <p class="subtitle">Sua presença é o nosso maior presente! Se quiser nos ajudar a construir nosso sonho, escolha uma cota abaixo:</p>
-            
-            <div class="gifts-grid">
-                
-                <div class="gift-card">
-                    <span class="gift-icon">☕</span>
-                    <h3>Nosso Primeiro Café da Manhã</h3>
-                    <p>Um momento especial para celebrarmos o dia seguinte! (Cota de R$ 50)</p>
-                    <a href="[LINK DE PAGAMENTO AQUI - R$ 50]" target="_blank" class="gift-button">Contribuir com R$ 50</a>
-                </div>
+  <main class="content-section gifts-page">
+    <div class="container">
+      <header class="gifts-header">
+        <h1 class="section-title-alt">Lista de Presentes</h1>
+        <p class="subtitle">Escolha um presente e confirme sua opção. Obrigado por fazer parte do nosso dia!</p>
 
-                <div class="gift-card">
-                    <span class="gift-icon">🍽️</span>
-                    <h3>Jantar Romântico na Lua de Mel</h3>
-                    <p>Ajude a financiar um jantar inesquecível em [Local da Lua de Mel]. (Cota de R$ 150)</p>
-                    <a href="[LINK DE PAGAMENTO AQUI - R$ 150]" target="_blank" class="gift-button">Contribuir com R$ 150</a>
-                </div>
-                
-                <div class="gift-card">
-                    <span class="gift-icon">🏖️</span>
-                    <h3>Passeio de Barco na Viagem</h3>
-                    <p>Uma experiência de aventura para a nossa lua de mel. (Cota de R$ 300)</p>
-                    <a href="[LINK DE PAGAMENTO AQUI - R$ 300]" target="_blank" class="gift-button">Contribuir com R$ 300</a>
-                </div>
-                
-                <div class="gift-card">
-                    <span class="gift-icon">💖</span>
-                    <h3>Presente de Livre Escolha</h3>
-                    <p>Se preferir, nos presenteie com o valor que seu coração mandar. (PIX)</p>
-                    <button class="gift-button pix-copy-button" data-pix-key="[SUA CHAVE PIX AQUI]">
-                        Copiar Chave PIX
-                    </button>
-                </div>
+        <!-- REMOVIDO: controles de busca / filtro -->
+      </header>
 
+      <section class="gift-list" id="giftList">
+        <!-- Exemplos de itens — duplique/alterar para seu catálogo -->
+        <article class="gift-item" data-title="Conjunto de Toalhas" data-status="available" data-id="g1">
+          <img class="gift-thumb" src="assets/televisao.jpeg" alt="Conjunto de Toalhas">
+          <div class="gift-body">
+            <h3 class="gift-title">Televisão</h3>
+            <p class="gift-desc">Smart TV 50” 4K LED Philco P50EAA UHD Android TV Chromecast Borda Infinita</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g1">Comprar</button>
             </div>
-            <p class="gifts-note">O valor arrecadado será usado integralmente em [Seu Destino] ou em nosso novo lar. Muito obrigado!</p>
-        </section>
+          </div>
+        </article>
 
-    </main>
+        <article class="gift-item" data-title="Caixa de Vinhos" data-status="available" data-id="g2">
+          <img class="gift-thumb" src="assets/geladeira.jpeg" alt="Caixa de Vinhos">
+          <div class="gift-body">
+            <h3 class="gift-title">Geladeira</h3>
+            <p class="gift-desc">Geladeira Consul CRM44MK Duplex Inverter 377L Frost Free Inox - 110V</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g2">Comprar</button>
+            </div>
+          </div>
+        </article>
 
-    <script src="script.js"></script>
-    <script>
-        // Força o header a ser preto nesta página (como fizemos no rsvp.html)
-        document.addEventListener('DOMContentLoaded', () => {
-             document.getElementById('main-header').classList.add('header-scrolled');
-        });
-    </script>
+        <article class="gift-item" data-title="Vale Viagem" data-status="available" data-id="g3">
+          <img class="gift-thumb" src="assets/panela de arroz.jpeg" alt="Vale Viagem">
+          <div class="gift-body">
+            <h3 class="gift-title">Panela Elétrica</h3>
+            <p class="gift-desc">Panela Elétrica de Arroz Philco PH5 Visor Glass 5 Xícaras - Preta/Inox - 110V</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g3">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Novos itens -->
+        <article class="gift-item" data-title="Jogo de Panelas" data-status="available" data-id="g4">
+          <img class="gift-thumb" src="assets/liquidificador.jpeg" alt="Jogo de Panelas">
+          <div class="gift-body">
+            <h3 class="gift-title">Liquidificador</h3>
+            <p class="gift-desc">Liquidificador Philco PH900 Preto 1200W com 12 Velocidades - 110V</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g4">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Máquina de Café" data-status="available" data-id="g5">
+          <img class="gift-thumb" src="assets/batedeira.jpeg" alt="Máquina de Café">
+          <div class="gift-body">
+            <h3 class="gift-title">Batedeira</h3>
+            <p class="gift-desc">Batedeira Mondial Prática Black B-44 com 3 Velocidades – Preta - 110V</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g5">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/jogo de copo.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Jogos de Copos</h3>
+            <p class="gift-desc">Jogo com 6 Copos Conjunto de Peças de Vidro Transparente, Linha 423ml para Suco e Água</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/jogo de taca.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Jogos de Taças</h3>
+            <p class="gift-desc">Jogo de 6 tacas para vinho branco Xtra em cristal ecologico 360ml A23,5cm</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/jogo panelas.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Jogos de Panelas</h3>
+            <p class="gift-desc">Jogo de Panelas Tramontina Paris Antiaderente Starflon Max Grafite 10 Peças</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/brinox.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Faqueiro</h3>
+            <p class="gift-desc">Brinox - Faqueiro Siena 42 Peças - Aço Inox</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/pote hermetico.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Potes</h3>
+            <p class="gift-desc">Pote Hermetico, 12 unidades</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/ventilador.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Ventilador</h3>
+            <p class="gift-desc">Ventilador de Coluna Britânia BVT350 Maxx Force 75W 127V</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/kit edredom.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Edredom</h3>
+            <p class="gift-desc">Kit Edredom Jogo de Cama Dupla Face 6 Peças Queen (Cinza)</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/ferro.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Ferro de passar</h3>
+            <p class="gift-desc">Ferro de passar seco e vapor Electrolux base antiaderente vapor vertical extra 1200W cabo 1,35m azul ESI10 127v</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/rack.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Rack</h3>
+            <p class="gift-desc">Rack para Tv ate 75" com 2 portas CHARLOTTE cor Pinho/Off White - Artely</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+          <img class="gift-thumb" src="assets/pendente.jpeg" alt="Jogos de Lençóis">
+          <div class="gift-body">
+            <h3 class="gift-title">Pendente</h3>
+            <p class="gift-desc">Pendente Luminária Lustre Base Tripla Fio Regulável</p>
+            <div class="gift-actions">
+              <button class="buy-button" data-id="g6">Comprar</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/luminaria.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Luminaria</h3>
+              <p class="gift-desc">Luminaria de Teto, Lustre Sala, Pendente, Luminária de Teto, Lustre Quarto, para Sala de Jantar, Luminaria Pendente</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/abajur.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Abajur</h3>
+              <p class="gift-desc">Abajur de Mesa Dourado com Cúpula Branca – Toque Sofisticado para sua Decoração</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/kit potes.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Potes</h3>
+              <p class="gift-desc">Kit 10 Potes Plásticos 350ml Transparentes Container Retangular</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/cortina.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Cortinas</h3>
+              <p class="gift-desc">Cortina Roma Para Sala e Quarto 4,00 x 2,50 Admirare Cor: Creme</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>    
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/espelho.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Espelho</h3>
+              <p class="gift-desc">LYOR - Espelho Orgânico com Borda de Metal Dourado 21cm x 35cm</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article> 
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/panificadora.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Panificadora</h3>
+              <p class="gift-desc">Panificadora, Multipane, 550W, Preto, 220v, Britânia</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/forno eletrico.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Forno Eletrico</h3>
+              <p class="gift-desc">Forno Elétrico 43L Britânia BFE43 Dupla Resistência 110V</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/bandeja.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Ceramica</h3>
+              <p class="gift-desc">Bandeja Luxo Decorativa com alças Grande Borda Dourada Banheiro Lavabo Multiuso Cantinho do Café</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/cabide.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Cabides</h3>
+              <p class="gift-desc">Cabideiro Decorações de Halloween, Fantasias de Halloween, Decoração de Outono, Decoração de Festival</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/cabide.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Cesto de Roupa</h3>
+              <p class="gift-desc">Cesto De Roupa 72L Bambu Dobravel Organizador Forrado Banheiro Grande Cesto Roupa Suja Retangular</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/queijo.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Queijeira</h3>
+              <p class="gift-desc">Queijeira De Cerâmica Suporte Para Queijo Travessa Café</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/caixa de pao.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Caixa de Pão</h3>
+              <p class="gift-desc">Caixa De Pão Bambu Tampa Retrátil Porta Pães E Armazenamento De Biscoitos Bolachas Frutas</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/jogo de jantar.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Jogo de Jantar</h3>
+              <p class="gift-desc">1 AP. DE JANTAR/CHA 20PCS - M. ORDER - BRISA - AW20-5903</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/porcelana.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Porcelana</h3>
+              <p class="gift-desc">Porcelana Schmidt Serviço de Jantar e Chá 20 peças Relevo Pomerode Branco</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+
+          <article class="gift-item" data-title="Jogos de Lençóis" data-status="available" data-id="g6">
+            <img class="gift-thumb" src="assets/faqueiro.jpeg" alt="Jogos de Lençóis">
+            <div class="gift-body">
+              <h3 class="gift-title">Faqueiro</h3>
+              <p class="gift-desc">Jogo de Talheres Faqueiro Inox 24 Peças Búzios Tramontina</p>
+              <div class="gift-actions">
+                <button class="buy-button" data-id="g6">Comprar</button>
+              </div>
+            </div>
+          </article>
+      </section>
+    </div>
+  </main>
+
+  <!-- Modal de Compra -->
+  <div id="purchaseModal" class="modal">
+      <div class="modal-content">
+          <span class="close-modal">&times;</span>
+          <div class="modal-grid">
+              <div class="modal-image">
+                  <img id="modalImage" src="" alt="Imagem do Presente">
+              </div>
+              <div class="modal-info">
+                  <h2 id="modalTitle"></h2>
+                  <p id="modalDesc"></p>
+                  <div class="pix-section">
+                      <h3>Dados para Pagamento</h3>
+                      <div class="qr-code">
+                          <img src="assets/qrcode.jpg" alt="QR Code PIX">
+                      </div>
+                      <div class="pix-key">
+                          <p>Chave PIX: <span id="pixKey">joaogabrielfigueira89@gmail.com</span></p>
+                          <button class="copy-pix">Copiar Link</button>
+                      </div>
+                  </div>
+                  <div class="confirmation-note">
+                      <p>Após o pagamento, o presente será marcado como comprado automaticamente.</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>

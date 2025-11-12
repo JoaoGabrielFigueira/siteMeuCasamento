@@ -107,3 +107,82 @@ if (document.readyState === 'loading') {
 // Altura da sua navbar fixa
 const NAVBAR_HEIGHT = 70;
 
+// Busca simples, filtro e marcação de compra (estado local — sem backend)
+document.addEventListener('DOMContentLoaded', () => {
+  const list = document.getElementById('giftList');
+  if (!list) return; // nada a fazer se não estivermos na página de presentes
+
+  // removi a lógica de busca/filtro (não existe mais no HTML)
+
+  // comprar / desfazer compra (apenas UI local)
+  list.addEventListener('click', (e) => {
+    const btn = e.target.closest('.buy-button');
+    if (!btn) return;
+    const id = btn.dataset.id;
+    const item = list.querySelector(`.gift-item[data-id="${id}"]`);
+    if (!item) return;
+    const status = item.getAttribute('data-status') || 'available';
+
+    if (status === 'available') {
+      // marcar como comprado
+      item.setAttribute('data-status', 'reserved');
+      btn.classList.add('purchased');
+      btn.textContent = 'Comprado';
+      btn.disabled = true;
+    } else {
+      // caso queira permitir desfazer, ajuste aqui (no momento não permite)
+    }
+  });
+
+  // removi o handler de detalhes (não existe mais botão de detalhes)
+});
+
+// Modal de Compra
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('purchaseModal');
+    const closeBtn = document.querySelector('.close-modal');
+    const copyPixBtn = document.querySelector('.copy-pix');
+    const pixKey = document.getElementById('pixKey');
+
+    // Abrir modal ao clicar em Comprar
+    document.querySelectorAll('.buy-button').forEach(button => {
+        button.addEventListener('click', function() {
+            const item = this.closest('.gift-item');
+            const title = item.querySelector('.gift-title').textContent;
+            const desc = item.querySelector('.gift-desc').textContent;
+            const img = item.querySelector('.gift-thumb').src;
+
+            document.getElementById('modalTitle').textContent = title;
+            document.getElementById('modalDesc').textContent = desc;
+            document.getElementById('modalImage').src = img;
+
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Fechar modal
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+
+    // Fechar ao clicar fora
+    window.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Copiar chave PIX
+    copyPixBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(pixKey.textContent).then(() => {
+            copyPixBtn.textContent = 'Copiado!';
+            setTimeout(() => {
+                copyPixBtn.textContent = 'Copiar Chave PIX';
+            }, 2000);
+        });
+    });
+});
+
