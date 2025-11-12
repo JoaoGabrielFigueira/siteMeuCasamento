@@ -194,3 +194,74 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+// === CONFIRMAÇÃO DE PRESENÇA ===
+
+// Lista de convidados com apelidos
+const guests = [
+  { name: "João Figueira", nickname: "Joãozinho" },
+  { name: "Maria Clara", nickname: "Clarinha" },
+  { name: "Pedro Santos", nickname: "Pedrão" },
+  { name: "Ana Souza", nickname: "Aninha" },
+  // Adicione todos os outros aqui
+];
+
+const input = document.getElementById('guestInput');
+const result = document.getElementById('guestResult');
+const nicknameEl = document.getElementById('guestNickname');
+const messageEl = document.getElementById('rsvpMessage');
+
+const confirmBtn = document.getElementById('confirmButton');
+const declineBtn = document.getElementById('declineButton');
+
+let currentGuest = null;
+
+// Função para remover acentos e deixar tudo em minúsculo
+function normalizeText(text) {
+  return text
+    .normalize("NFD") // separa letras e acentos
+    .replace(/[\u0300-\u036f]/g, "") // remove os acentos
+    .toLowerCase()
+    .trim();
+}
+
+input.addEventListener('input', () => {
+  const value = normalizeText(input.value);
+  if (value.length < 3) {
+    result.classList.add('hidden');
+    messageEl.textContent = '';
+    return;
+  }
+
+  const found = guests.find(g => normalizeText(g.name).includes(value));
+
+  if (found) {
+    currentGuest = found;
+    nicknameEl.textContent = found.nickname;
+    result.classList.remove('hidden');
+    messageEl.textContent = '';
+    messageEl.style.color = '';
+  } else {
+    currentGuest = null;
+    result.classList.add('hidden');
+    messageEl.textContent = 'Nome não encontrado. Verifique a grafia.';
+    messageEl.style.color = '#c00';
+  }
+});
+
+
+// Botões de ação
+confirmBtn.addEventListener('click', () => {
+  if (!currentGuest) return;
+  messageEl.textContent = `✅ Presença confirmada! Te esperamos, ${currentGuest.nickname}!`;
+  messageEl.style.color = 'green';
+  result.classList.add('hidden');
+  input.value = '';
+});
+
+declineBtn.addEventListener('click', () => {
+  if (!currentGuest) return;
+  messageEl.textContent = `❌ Sentiremos sua falta, ${currentGuest.nickname}.`;
+  messageEl.style.color = '#c00';
+  result.classList.add('hidden');
+  input.value = '';
+});
