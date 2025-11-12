@@ -147,18 +147,26 @@ document.addEventListener('DOMContentLoaded', function() {
     // Abrir modal ao clicar em Comprar
     document.querySelectorAll('.buy-button').forEach(button => {
         button.addEventListener('click', function() {
-            const item = this.closest('.gift-item');
-            const title = item.querySelector('.gift-title').textContent;
-            const desc = item.querySelector('.gift-desc').textContent;
-            const img = item.querySelector('.gift-thumb').src;
+        const item = this.closest('.gift-item');
+        const title = item.querySelector('.gift-title').textContent;
+        const desc = item.querySelector('.gift-desc').textContent;
+        const img = item.querySelector('.gift-thumb').src;
+        const price = item.dataset.price || '—';
+        const checkout = item.dataset.checkout || '#';
 
-            document.getElementById('modalTitle').textContent = title;
-            document.getElementById('modalDesc').textContent = desc;
-            document.getElementById('modalImage').src = img;
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalDesc').textContent = desc;
+        document.getElementById('modalImage').src = img;
+        document.getElementById('modalPrice').textContent =
+            `Seu presente: R$ ${Number(price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
 
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-        });
+        // Atualiza o link do botão de pagamento
+        document.getElementById('checkoutButton').href = checkout;
+
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden';
+});
+
     });
 
     // Fechar modal

@@ -1422,3 +1422,30 @@ html {
         padding: 15px;
     }
 }
+
+.checkout-button {
+  display: inline-block;
+  background-color: #000;
+  color: #fff;
+  padding: 12px 25px;
+  border-radius: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 16px;
+  text-decoration: none;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.checkout-button:hover {
+  background-color: #333;
+  transform: translateY(-2px);
+}
+
+.payment-note {
+  text-align: center;
+  margin-top: 15px;
+  color: #888;
+  font-size: 14px;
+  font-style: italic;
+}
