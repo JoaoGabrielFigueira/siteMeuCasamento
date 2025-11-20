@@ -193,75 +193,149 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 });
+// ==========================
+// CONFIRMAÇÃO DE PRESENÇA
+// ==========================
 
-// === CONFIRMAÇÃO DE PRESENÇA ===
+// URL do backend
+const API_BASE_URL = "http://localhost:3000";
 
-// Lista de convidados com apelidos
-const guests = [
-  { name: "João Figueira", nickname: "Joãozinho" },
-  { name: "Maria Clara", nickname: "Clarinha" },
-  { name: "Pedro Santos", nickname: "Pedrão" },
-  { name: "Ana Souza", nickname: "Aninha" },
-  // Adicione todos os outros aqui
-];
+// Elementos
+const guestInput = document.getElementById("guestInput");
+const guestResult = document.getElementById("guestResult");
+const guestNicknameEl = document.getElementById("guestNickname");
+const rsvpMessageEl = document.getElementById("rsvpMessage");
 
-const input = document.getElementById('guestInput');
-const result = document.getElementById('guestResult');
-const nicknameEl = document.getElementById('guestNickname');
-const messageEl = document.getElementById('rsvpMessage');
-
-const confirmBtn = document.getElementById('confirmButton');
-const declineBtn = document.getElementById('declineButton');
+const confirmBtn = document.getElementById("confirmButton");
+const declineBtn = document.getElementById("declineButton");
 
 let currentGuest = null;
 
-// Função para remover acentos e deixar tudo em minúsculo
-function normalizeText(text) {
+// Remove acentos
+function normalize(text) {
   return text
-    .normalize("NFD") // separa letras e acentos
-    .replace(/[\u0300-\u036f]/g, "") // remove os acentos
-    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
     .trim();
 }
 
-input.addEventListener('input', () => {
-  const value = normalizeText(input.value);
-  if (value.length < 3) {
-    result.classList.add('hidden');
-    messageEl.textContent = '';
+// ==========================
+// BUSCAR CONVIDADO
+// ==========================
+async function searchGuest() {
+  const rawInput = guestInput.value.trim();
+
+  if (rawInput.length < 3) {
+    rsvpMessageEl.textContent = "Digite pelo menos 3 letras.";
+    guestResult.classList.add("hidden");
     return;
   }
 
-  const found = guests.find(g => normalizeText(g.name).includes(value));
+  rsvpMessageEl.textContent = "Buscando...";
+  guestResult.classList.add("hidden");
 
-  if (found) {
-    currentGuest = found;
-    nicknameEl.textContent = found.nickname;
-    result.classList.remove('hidden');
-    messageEl.textContent = '';
-    messageEl.style.color = '';
-  } else {
-    currentGuest = null;
-    result.classList.add('hidden');
-    messageEl.textContent = 'Nome não encontrado. Verifique a grafia.';
-    messageEl.style.color = '#c00';
+  try {
+    // ⚠️ Agora enviamos o nome exatamente como digitado
+    const encoded = encodeURIComponent(rawInput);
+
+    const response = await fetch(`${API_BASE_URL}/api/guest/${encoded}`);
+
+    if (!response.ok) {
+      rsvpMessageEl.textContent = "Convidado não encontrado 😢";
+      currentGuest = null;
+      return;
+    }
+
+    const data = await response.json();
+
+    currentGuest = data.guest;
+
+    // Preenche apelido do convidado
+    guestNicknameEl.textContent = data.guest.apelido;
+
+    // Mensagem enviada pelo backend ("Mariazinha é você!!")
+    rsvpMessageEl.textContent = data.message;
+    rsvpMessageEl.style.color = "black";
+
+    guestResult.classList.remove("hidden");
+
+    // Se já confirmou antes, esconde botões
+    if (currentGuest.status !== "pending") {
+      confirmBtn.style.display = "none";
+      declineBtn.style.display = "none";
+    } else {
+      confirmBtn.style.display = "inline-block";
+      declineBtn.style.display = "inline-block";
+    }
+
+  } catch (err) {
+    console.error(err);
+    rsvpMessageEl.textContent = "Erro ao conectar ao servidor.";
+  }
+}
+
+// ==========================
+// CONFIRMAR / DECLINAR
+// ==========================
+async function handleRsvpAction(status) {
+  if (!currentGuest) return;
+
+  rsvpMessageEl.textContent = "Enviando...";
+  confirmBtn.disabled = true;
+  declineBtn.disabled = true;
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/rsvp`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        id: currentGuest.id,
+        status
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      rsvpMessageEl.textContent = data.error || "Erro ao salvar.";
+      return;
+    }
+
+    // Mensagem personalizada do backend
+    rsvpMessageEl.textContent = data.finalMessage;
+    rsvpMessageEl.style.color = status === "confirmed" ? "green" : "#b30000";
+
+    // Esconde botões
+    confirmBtn.style.display = "none";
+    declineBtn.style.display = "none";
+
+  } catch (err) {
+    console.error(err);
+    rsvpMessageEl.textContent = "Erro no servidor.";
+  } finally {
+    confirmBtn.disabled = false;
+    declineBtn.disabled = false;
+  }
+}
+
+// ==========================
+// EVENTOS
+// ==========================
+
+// Busca quando o usuário aperta ENTER
+guestInput.addEventListener("keydown", (e) => {
+  if (e.key === "Enter") {
+    searchGuest();
   }
 });
 
-
-// Botões de ação
-confirmBtn.addEventListener('click', () => {
-  if (!currentGuest) return;
-  messageEl.textContent = `✅ Presença confirmada! Te esperamos, ${currentGuest.nickname}!`;
-  messageEl.style.color = 'green';
-  result.classList.add('hidden');
-  input.value = '';
+// Busca automática depois de parar de digitar
+let typingTimer;
+guestInput.addEventListener("input", () => {
+  clearTimeout(typingTimer);
+  typingTimer = setTimeout(searchGuest, 500);
 });
 
-declineBtn.addEventListener('click', () => {
-  if (!currentGuest) return;
-  messageEl.textContent = `❌ Sentiremos sua falta, ${currentGuest.nickname}.`;
-  messageEl.style.color = '#c00';
-  result.classList.add('hidden');
-  input.value = '';
-});
+// Botões
+confirmBtn.addEventListener("click", () => handleRsvpAction("confirmed"));
+declineBtn.addEventListener("click", () => handleRsvpAction("declined"));

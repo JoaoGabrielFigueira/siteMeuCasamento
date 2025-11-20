@@ -60,6 +60,7 @@ html {
     padding: 0;
     margin: 0;
     display: flex; /* Para alinhar os itens do menu horizontalmente */
+    align-items: center;
 }
 
 #main-nav li {
@@ -70,7 +71,8 @@ html {
     text-decoration: none;
     color: #ffffff; 
     font-weight: 400;
-    display: block;
+    display: flex;
+    align-items: center;
     padding: 3px 0;
     position: relative;
     font-family: 'Montserrat', serif; 
@@ -1297,7 +1299,7 @@ html {
 .page-presents #main-nav a {
     color: #fff;
     text-decoration: none;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: 550;
     font-family: 'Montserrat', sans-serif;
     transition: all 0.3s ease;
@@ -1511,7 +1513,7 @@ html {
 
 /* === CONFIRMAÇÃO DE PRESENÇA === */
 .rsvp-section {
-  min-height: 86.5vh;
+  min-height: 87.1vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1643,6 +1645,7 @@ html {
     font-size: 3em;
     color: #000000;
     margin-bottom: 5px;
+    margin-top: -10px;
 }
 
 .gallery-subtitle {
@@ -1738,72 +1741,119 @@ html {
         aspect-ratio: auto;
     }
 }
+/* --- Estilos: GALERIA (Força Navbar Preta e Corrige Alinhamento Vertical) --- */
 
-/* --- Estilos: GALERIA (Força Navbar Preta e Corrigindo Layout) --- */
-
-/* 1. RESET BÁSICO DO HEADER (Garante Fundo e Posição Fixa) */
+/* 1. RESET BÁSICO E POSICIONAMENTO DO HEADER */
 .page-gallery #main-header {
-    /* Garante a cor, a fixação e o tamanho */
+    height: 70px; 
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 70px; 
-    background: #000000 !important;
-    margin-top: 0 !important;
+    background-color: #000; 
+    box-shadow: none; 
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 100px;
+    box-sizing: border-box;
     z-index: 1000;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5); 
-    padding: 0 !important; /* Limpa padding do header principal */
-    display: block; 
+    transition: background-color 0.3s, box-shadow 0.3s;
+    margin-top: 0 !important;
+    margin-left: -70px;
+    margin-bottom: 0 !important;
 }
 
-/* 2. ESTILO DO CONTAINER INTERNO (Alinha Logo e Menu) */
+/* 2. ESTILO DO CONTAINER INTERNO (Alinha Logo e Menu HORIZONTALMENTE) */
 .page-gallery #main-header .container {
     display: flex;
-    justify-content: space-between; /* ESSENCIAL: Joga logo para esquerda e menu para direita */
-    align-items: center;            /* Alinhamento vertical centralizado */
-    /* Assumindo que este é o alinhamento horizontal correto do seu site: */
+    justify-content: space-between; /* Espaço entre logo e menu */
+    align-items: center;            /* Alinhamento vertical centralizado principal */
     max-width: 1200px;              
-    margin: 0 auto;                 /* Centraliza o container */
-    padding: 0 100px;               /* <--- CHAVE: Usando o padding lateral grande (100px) do seu design original */
-    height: 70px;                   
+    margin: 0 auto;                 
+    padding: 0 100px;               /* Espaçamento lateral do seu design */
+    height: 70px;                   /* Altura total do container */
     width: 100%;
+}
+
+.logo {
+    /* Remove a margem direita que era para separar o h1 do menu */
+    /* Garante alinhamento vertical */
+    display: flex;
+    align-items: center;
+    margin-left: -70px;
 }
 
 /* 3. Ajustes de Cores */
-
-/* Logo Branca */
 .page-gallery .site-logo {
+    max-height: 100px; 
+    width: auto;
+    display: block;
+    /* Adiciona transição para o hover se quiser algum efeito */
+    transition: opacity 0.3s;
     filter: brightness(0) invert(1) !important; /* Logo Branca */
 }
 
+/* 4. ALINHAMENTO VERTICAL DO MENU (CHAVE DA CORREÇÃO) */
 .page-gallery #main-nav {
     flex: 1; 
-    text-align: right; /* Alinha o menu para a direita */
+    text-align: center; 
+    height: 100%; /* Garante que a NAV ocupe toda a altura */
+    display: flex; 
+    align-items: center; /* CENTRALIZA o UL verticalmente dentro da NAV */
+    justify-content: center; 
 }
 
-/* Garante o padding correto nos links */
+/* 5. RESET FORÇADO DA LISTA (IMPEDE CORTE) */
 .page-gallery #main-nav ul {
-    display: flex;
-    justify-content: flex-end; /* ESSENCIAL: Alinha os itens da lista para a direita */
+    display: flex; 
+    justify-content: center; 
     gap: 15px; 
-    margin: 0;
-    padding: 0;
+    /* RESET DE MARGEM E PADDING COM !important PARA REMOVER CONFLITOS */
+    margin: 0 !important; 
+    padding: 0 !important;
     list-style: none;
+    align-items: center; 
 }
 
-/* Links Brancos */
+/* 6. RESET FORÇADO DOS ITENS DA LISTA */
+.page-gallery #main-nav ul li {
+    /* RESET DE MARGEM E PADDING NO LI */
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
 .page-gallery #main-nav a {
     color: #ffffff !important;
+    white-space: nowrap; 
 }
 
-/* 4. Ajusta o conteúdo principal */
-.page-gallery .gallery-section {
-    padding-top: 100px; 
+/* ========================================================= */
+/* --- OVERRIDE: NAVBAR SEMPRE TRANSPARENTE (RSVP) --- */
+/* Usa ID para prevalecer sobre .page-presents, mantendo o layout */
+/* ========================================================= */
+
+#rsvp-transparent #main-header {
+    background-color: transparent !important; /* Força o fundo transparente */
+    box-shadow: none !important;            /* Remove a sombra */
+    transition: none !important;            /* Desabilita a transição de cor */
+    margin-top: 15px !important;            /* Mantém o espaçamento superior do estado transparente */
 }
 
-/* 5. Desabilita o Scroll (já é preto) */
-.page-gallery #main-header.header-scrolled {
-    background-color: #000000 !important;
-    margin-top: 0px !important;
+/* Anula o estado de rolagem (header-scrolled) para garantir que continue transparente */
+#rsvp-transparent #main-header.header-scrolled {
+    background-color: transparent !important;
+    box-shadow: none !important;
+    transition: none !important;
+    margin-top: 15px !important;
 }
+
+#rsvpMessage {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: #ffffff !important; /* ou a cor que quiser */
+  margin-top: 12px;
+  font-family: playfair display, serif;
+  font-size: 1.1rem;
+}
+

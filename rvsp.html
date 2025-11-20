@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmação de Presença | [Seu Nome] & [Parceiro(a)]</title>
+    <title>Confirmação de Presença | Isabela & João</title>
     <link rel="stylesheet" href="style.css"> 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
 </head>
-<body class="page-presents">
+<body class="page-presents" id="rsvp-transparent">
 
-    <header id="main-header" class="rvsp">
+    <header id="main-header">
     <div class="container">
       <div class="logo">
         <a href="index.html">
@@ -40,14 +40,15 @@
             <input type="text" id="guestInput" placeholder="Digite seu nome..." autocomplete="off">
 
             <div id="guestResult" class="hidden">
-              <p>Olá, <span id="guestNickname"></span></p>
+              <p><span id="guestNickname"></span></p>
               <div class="rsvp-buttons">
+                <p id="rsvpMessage" class="rsvp-message"></p>
                 <button id="confirmButton" class="btn confirm">Confirmar Presença</button>
                 <button id="declineButton" class="btn decline">Não irei</button>
               </div>
             </div>
 
-            <p id="rsvpMessage" class="rsvp-message"></p>
+            
           </div>
         </section>
 
