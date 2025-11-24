@@ -182,7 +182,6 @@ html {
     color: #000000;
     margin-bottom: 5px;
     font-family: 'Playfair Display', sans-serif; 
-    margin-top: 60px; /* antes: 150px — reduzido */
 }
 
 .content-section .subtitle {
@@ -546,7 +545,7 @@ html {
     height: auto; 
     overflow: hidden; /* Garante que a imagem não transborde */
     margin-top: -130px; /* PUXA PARA CIMA para sobrepor a borda da seção anterior */
-    margin-bottom: -10px; /* PUXA PARA CIMA para sobrepor a borda da seção seguinte */
+    margin-bottom: -30px; /* PUXA PARA CIMA para sobrepor a borda da seção seguinte */
     position: relative;
     z-index: 5; /* Garante que ela fique acima das bordas das seções */
     background-color: transparent; /* Para garantir que não haja fundo sólido */
@@ -1855,5 +1854,235 @@ html {
   margin-top: 12px;
   font-family: playfair display, serif;
   font-size: 1.1rem;
+}
+
+/* --------------------------- */
+
+/* ======================================= */
+/* 4. MEDIA QUERIES GERAIS DE RESPONSIVIDADE */
+/* ======================================= */
+
+/* --- TELAS MÉDIAS (Tablets e Desktops menores: Max-width 1024px) --- */
+@media (max-width: 1024px) {
+    /* Header (Navbar) */
+    #main-header, .header-scrolled {
+        padding: 0 40px !important; /* Diminui o padding horizontal */
+    }
+
+    /* Conteúdo da Seção Inicial (Nomes) */
+    .names {
+        font-size: 4em; /* Reduz o tamanho da fonte do nome */
+    }
+
+    /* Galeria de Fotos e Gifts Grid (Já implementado, mas revisado) */
+    .photo-grid, .gifts-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colunas */
+        gap: 20px;
+    }
+
+    /* Fases/Timeline (Empilhamento) */
+    .phases-container {
+        flex-wrap: wrap; /* Permite que os itens quebrem a linha */
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    .phase-item {
+        flex-basis: 45%; /* 2 colunas */
+    }
+
+    /* Detalhes do Evento (Grid) */
+    .event-details-grid {
+        gap: 20px;
+    }
+}
+
+
+/* --- TELAS PEQUENAS (Smartphones: Max-width 768px) --- */
+@media (max-width: 768px) {
+    /* HEADER E NAVEGAÇÃO */
+    #main-header, .header-scrolled {
+        display: flex !important;
+        justify-content: flex-start !important;
+        align-items: right !important;
+        height: 50px !important; /* Header menor */
+        width: 100%;
+        padding: 0 10px !important; /* Padding mais estreito */
+        margin-top: 0 !important;
+    }
+
+    .logo{
+        margin-left: 0 !important; /* Zera qualquer margem de desktop */
+        /* Centraliza o logo (caso haja outros elementos) */
+        display: flex;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    /* O LOGO deve ficar menor */
+    .site-logo {
+        max-height: 35px;
+        width: auto;
+    }
+
+    /* MENU HAMBURGUER (A navegação de links deve ser ocultada e acionada por JS/Menu Hamburguer) */
+    /* *** Você precisará adicionar o ícone do menu no HTML e a lógica JS para exibir a navegação *** */
+    #main-nav {
+        /* Por padrão, ocultamos o menu horizontal em telas pequenas */
+        display: none !important; 
+    }
+    
+    /* Configurações do Título (Hero Section) */
+    .names {
+        font-size: 3em; /* Redução drástica para caber em telas estreitas */
+        margin-top: 10px;
+    }
+    .hero-quote {
+        font-size: 1.2em;
+    }
+    .hero-date, .hero-location {
+        font-size: 1em;
+        letter-spacing: 1px;
+    }
+    .countdown-timer {
+        gap: 15px; /* Reduz o espaço entre os blocos do timer */
+    }
+    .timer-box span {
+        font-size: 2em;
+    }
+    .timer-box small {
+        font-size: 0.7em;
+    }
+
+    /* Seções de Conteúdo */
+    .content-section {
+        padding: 20px 20px; /* Reduz o padding lateral do conteúdo */
+        padding-top: 70px;
+    }
+    .content-section h2 {
+        font-size: 2.2em;
+        margin-top: 40px;
+    }
+    .content-section .subtitle {
+        font-size: 1em;
+        margin-bottom: 30px;
+    }
+    
+    /* DETALHES DO EVENTO (Empilha os cards - Já implementado no seu código, mas reforça) */
+    .event-details-grid {
+        flex-direction: column;
+    }
+    .detail-card {
+        margin-bottom: 20px;
+        flex: auto;
+    }
+    
+    /* TIMELINE (Layout de coluna única) */
+    .timeline-container::after {
+        left: 31px; /* Move a linha central para a esquerda */
+    }
+    .timeline-item {
+        width: 100%; /* Ocupa a largura total */
+        padding-left: 70px; /* Adiciona espaço à esquerda */
+        padding-right: 25px;
+    }
+    .left::after, .right::after {
+        left: 18px; /* Alinha o ponto/círculo à nova linha central */
+        right: auto;
+    }
+    .left .timeline-content::before, .right .timeline-content::before {
+        border: medium solid #f7f7f7;
+        border-width: 10px 10px 10px 0; /* Ajusta a seta para apontar da direita */
+        border-color: transparent #f7f7f7 transparent transparent;
+        left: 59px; /* Posiciona a seta para tocar na linha central */
+        right: auto;
+    }
+    .right {
+        left: 0%; /* Remove o deslocamento para a direita */
+    }
+    
+    /* GALLERY e GIFTS (1 Coluna) */
+    .photo-grid, .gifts-grid {
+        grid-template-columns: 1fr; /* 1 coluna em celular */
+        padding: 0 10px;
+    }
+
+    /* CHAMADA PARA AÇÃO (Empilha os cards - Já implementado no seu código) */
+    .call-to-action-section {
+        flex-direction: column;
+        min-height: 800px;
+    }
+    .cta-title {
+        font-size: 2em;
+    }
+    .cta-text {
+        font-size: 1em;
+    }
+    
+    /* Container de Fases/Imagens (1 Coluna) */
+    .phases-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+    }
+    .phase-item {
+        flex-basis: auto;
+    }
+
+    /* Páginas internas (Detalhes do Evento) */
+    .event-row {
+        grid-template-columns: 1fr; /* 1 coluna */
+        gap: 30px;
+    }
+
+    /* Reduz o tamanho da data vertical */
+    .wedding-date-vertical .wd-part {
+        font-size: 80px;
+    }
+    .venue-figure {
+        max-width: 100%;
+    }
+    
+    /* GRID DE PRESENTES (Lista) */
+    .gift-list {
+        grid-template-columns: 1fr;
+    }
+
+    .page-presents #main-header {
+        height: 50px !important;
+        padding: 0 10px !important;
+    }
+
+    .page-presents .site-logo {
+        max-height: 40px;
+    }
+
+}
+
+/* --- MOBILE EXTREMO (Max-width 480px) --- */
+@media (max-width: 480px) {
+    /* Conteúdo da Seção Inicial */
+    .names {
+        font-size: 2.5em; /* Ajuste para caber nomes longos */
+    }
+    .hero-quote {
+        font-size: 1.1em;
+    }
+    .timer-box span {
+        font-size: 1.8em;
+    }
+
+    /* Ajuste fino do header na página de presentes */
+    .page-presents #main-header, .page-presents .header-scrolled {
+        padding: 0 10px !important;
+    }
+
+    .page-presents .logo {
+        margin-left: 0;
+    }
+
+    .site-logo {
+        max-height: 35px; /* Reduz um pouco mais em telas muito pequenas */
+    }
 }
 

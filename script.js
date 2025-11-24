@@ -339,3 +339,85 @@ guestInput.addEventListener("input", () => {
 // Botões
 confirmBtn.addEventListener("click", () => handleRsvpAction("confirmed"));
 declineBtn.addEventListener("click", () => handleRsvpAction("declined"));
+// ==========================
+// MENU MOBILE FULLSCREEN PRETO
+// ==========================
+
+document.addEventListener("DOMContentLoaded", () => {
+    const mobileMenu = document.getElementById("mobileMenu");
+    const openMenuBtn = document.getElementById("menuToggle");
+    const closeMenuBtn = document.getElementById("closeMenu");
+
+    if (!mobileMenu || !openMenuBtn || !closeMenuBtn) return;
+
+    // Abrir menu
+    openMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.add("active");
+        document.body.style.overflow = "hidden"; // trava scroll
+    });
+
+    // Fechar menu
+    closeMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.remove("active");
+        document.body.style.overflow = ""; // libera scroll
+    });
+
+    // Fechar ao clicar em um link
+    mobileMenu.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+            mobileMenu.classList.remove("active");
+            document.body.style.overflow = "";
+        });
+    });
+});
+
+// Fallback robusto para abrir/fechar menu mobile (adicionar ao final de script.js)
+(function() {
+  function safeGet(id) {
+    return document.getElementById(id);
+  }
+
+  function openMobileMenu() {
+    const m = safeGet('mobileMenu');
+    if (!m) return;
+    m.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeMobileMenu() {
+    const m = safeGet('mobileMenu');
+    if (!m) return;
+    m.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  // tenta ligar os eventos imediatamente e também depois do DOMContentLoaded
+  function attachMenuHandlers() {
+    const openBtn = safeGet('menuToggle');
+    const closeBtn = safeGet('closeMenu');
+    const mobileMenu = safeGet('mobileMenu');
+
+    if (openBtn && closeBtn && mobileMenu) {
+      // remove listeners duplicados (seguro) e adiciona os nossos
+      openBtn.removeEventListener('click', openMobileMenu);
+      closeBtn.removeEventListener('click', closeMobileMenu);
+
+      openBtn.addEventListener('click', openMobileMenu);
+      closeBtn.addEventListener('click', closeMobileMenu);
+
+      // fecha quando clicar em um link dentro do menu
+      mobileMenu.querySelectorAll('a').forEach(a => {
+        a.removeEventListener('click', closeMobileMenu);
+        a.addEventListener('click', closeMobileMenu);
+      });
+    }
+  }
+
+  // tentar já
+  attachMenuHandlers();
+
+  // garantir após carregamento
+  document.addEventListener('DOMContentLoaded', attachMenuHandlers);
+  // também garantimos após cargas tardias ou frameworks que modifiquem DOM
+  window.addEventListener('load', attachMenuHandlers);
+})();
