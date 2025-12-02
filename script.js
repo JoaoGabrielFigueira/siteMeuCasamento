@@ -137,62 +137,80 @@ document.addEventListener('DOMContentLoaded', () => {
   // removi o handler de detalhes (não existe mais botão de detalhes)
 });
 
-// Modal de Compra
+// Modal de Compra (seguro — só registra handlers se os elementos existirem)
 document.addEventListener('DOMContentLoaded', function() {
     const modal = document.getElementById('purchaseModal');
-    const closeBtn = document.querySelector('.close-modal');
-    const copyPixBtn = document.querySelector('.copy-pix');
-    const pixKey = document.getElementById('pixKey');
+    const closeBtn = modal ? modal.querySelector('.close-modal') : null;
+    const copyPixBtn = modal ? modal.querySelector('.copy-pix') : null;
+    const pixKey = modal ? modal.querySelector('#pixKey') : null;
 
     // Abrir modal ao clicar em Comprar
     document.querySelectorAll('.buy-button').forEach(button => {
         button.addEventListener('click', function() {
-        const item = this.closest('.gift-item');
-        const title = item.querySelector('.gift-title').textContent;
-        const desc = item.querySelector('.gift-desc').textContent;
-        const img = item.querySelector('.gift-thumb').src;
-        const price = item.dataset.price || '—';
-        const checkout = item.dataset.checkout || '#';
+            const item = this.closest('.gift-item');
+            if (!item || !modal) return;
+            const title = item.querySelector('.gift-title') ? item.querySelector('.gift-title').textContent : '';
+            const desc = item.querySelector('.gift-desc') ? item.querySelector('.gift-desc').textContent : '';
+            const imgEl = item.querySelector('.gift-thumb');
+            const img = imgEl ? imgEl.src : '';
+            const price = item.dataset.price || '—';
+            const checkout = item.dataset.checkout || '#';
 
-        document.getElementById('modalTitle').textContent = title;
-        document.getElementById('modalDesc').textContent = desc;
-        document.getElementById('modalImage').src = img;
-        document.getElementById('modalPrice').textContent =
-            `Seu presente: R$ ${Number(price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+            const modalImage = document.getElementById('modalImage');
+            const modalPrice = document.getElementById('modalPrice');
+            const checkoutButton = document.getElementById('checkoutButton');
 
-        // Atualiza o link do botão de pagamento
-        document.getElementById('checkoutButton').href = checkout;
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalDesc) modalDesc.textContent = desc;
+            if (modalImage) modalImage.src = img;
+            if (modalPrice) modalPrice.textContent =
+                `Seu presente: R$ ${Number(price).toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+            if (checkoutButton) checkoutButton.href = checkout;
 
-        modal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-});
-
+            modal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        });
     });
 
     // Fechar modal
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-    });
-
-    // Fechar ao clicar fora
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
             modal.style.display = 'none';
             document.body.style.overflow = '';
-        }
-    });
-
-    // Copiar chave PIX
-    copyPixBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(pixKey.textContent).then(() => {
-            copyPixBtn.textContent = 'Copiado!';
-            setTimeout(() => {
-                copyPixBtn.textContent = 'Copiar Chave PIX';
-            }, 2000);
         });
-    });
+    }
+
+    // Fechar ao clicar fora
+    if (modal) {
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = '';
+            }
+        });
+    }
+
+    // Copiar chave PIX (com fallback)
+    if (copyPixBtn) {
+        copyPixBtn.addEventListener('click', () => {
+            const key = pixKey ? pixKey.textContent : '';
+            if (navigator.clipboard && key) {
+                navigator.clipboard.writeText(key).then(() => {
+                    const old = copyPixBtn.textContent;
+                    copyPixBtn.textContent = 'Copiado!';
+                    setTimeout(() => { copyPixBtn.textContent = old; }, 2000);
+                }).catch(() => {
+                    alert('Não foi possível copiar automaticamente. Copie manualmente: ' + key);
+                });
+            } else {
+                alert('Copie manualmente: ' + key);
+            }
+        });
+    }
 });
+
 // ==========================
 // CONFIRMAÇÃO DE PRESENÇA
 // ==========================
@@ -339,85 +357,30 @@ guestInput.addEventListener("input", () => {
 // Botões
 confirmBtn.addEventListener("click", () => handleRsvpAction("confirmed"));
 declineBtn.addEventListener("click", () => handleRsvpAction("declined"));
+
 // ==========================
-// MENU MOBILE FULLSCREEN PRETO
-// ==========================
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const fullscreenMenu = document.getElementById('fullscreenMenu');
 
-document.addEventListener("DOMContentLoaded", () => {
-    const mobileMenu = document.getElementById("mobileMenu");
-    const openMenuBtn = document.getElementById("menuToggle");
-    const closeMenuBtn = document.getElementById("closeMenu");
+  if (!hamburgerBtn || !fullscreenMenu) return;
 
-    if (!mobileMenu || !openMenuBtn || !closeMenuBtn) return;
-
-    // Abrir menu
-    openMenuBtn.addEventListener("click", () => {
-        mobileMenu.classList.add("active");
-        document.body.style.overflow = "hidden"; // trava scroll
-    });
-
-    // Fechar menu
-    closeMenuBtn.addEventListener("click", () => {
-        mobileMenu.classList.remove("active");
-        document.body.style.overflow = ""; // libera scroll
-    });
-
-    // Fechar ao clicar em um link
-    mobileMenu.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            mobileMenu.classList.remove("active");
-            document.body.style.overflow = "";
-        });
-    });
-});
-
-// Fallback robusto para abrir/fechar menu mobile (adicionar ao final de script.js)
-(function() {
-  function safeGet(id) {
-    return document.getElementById(id);
-  }
-
-  function openMobileMenu() {
-    const m = safeGet('mobileMenu');
-    if (!m) return;
-    m.classList.add('active');
+  const openMenu = () => {
+    hamburgerBtn.classList.add('active');
+    fullscreenMenu.classList.add('active');
     document.body.style.overflow = 'hidden';
-  }
+    hamburgerBtn.setAttribute('aria-expanded', 'true');
+  };
 
-  function closeMobileMenu() {
-    const m = safeGet('mobileMenu');
-    if (!m) return;
-    m.classList.remove('active');
+  const closeMenu = () => {
+    hamburgerBtn.classList.remove('active');
+    fullscreenMenu.classList.remove('active');
     document.body.style.overflow = '';
-  }
+    hamburgerBtn.setAttribute('aria-expanded', 'false');
+  };
 
-  // tenta ligar os eventos imediatamente e também depois do DOMContentLoaded
-  function attachMenuHandlers() {
-    const openBtn = safeGet('menuToggle');
-    const closeBtn = safeGet('closeMenu');
-    const mobileMenu = safeGet('mobileMenu');
-
-    if (openBtn && closeBtn && mobileMenu) {
-      // remove listeners duplicados (seguro) e adiciona os nossos
-      openBtn.removeEventListener('click', openMobileMenu);
-      closeBtn.removeEventListener('click', closeMobileMenu);
-
-      openBtn.addEventListener('click', openMobileMenu);
-      closeBtn.addEventListener('click', closeMobileMenu);
-
-      // fecha quando clicar em um link dentro do menu
-      mobileMenu.querySelectorAll('a').forEach(a => {
-        a.removeEventListener('click', closeMobileMenu);
-        a.addEventListener('click', closeMobileMenu);
-      });
-    }
-  }
-
-  // tentar já
-  attachMenuHandlers();
-
-  // garantir após carregamento
-  document.addEventListener('DOMContentLoaded', attachMenuHandlers);
-  // também garantimos após cargas tardias ou frameworks que modifiquem DOM
-  window.addEventListener('load', attachMenuHandlers);
-})();
+  hamburgerBtn.addEventListener('click', () => fullscreenMenu.classList.contains('active') ? closeMenu() : openMenu());
+  document.querySelectorAll('.fullscreen-nav a').forEach(l => l.addEventListener('click', closeMenu));
+  fullscreenMenu.addEventListener('click', e => { if (e.target === fullscreenMenu) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && fullscreenMenu.classList.contains('active')) closeMenu(); });
+});

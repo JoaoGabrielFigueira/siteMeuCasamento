@@ -10,23 +10,40 @@
   <!-- Substitua o header atual por este (mesmo markup da página inicial) -->
   <header id="main-header">
     <div class="container">
-      <div class="logo">
-        <a href="index.html">
-          <img src="assets/logo.png" alt="Isabela & João" class="site-logo">
-        </a>
-      </div>
+        <div class="logo">
+            <a href="index.html"><img src="assets/logo.png" alt="Isabela & João" class="site-logo"></a>
+        </div>
 
-      <nav id="main-nav">
-        <ul>
-          <li><a href="index.html">INÍCIO</a></li>
-          <li><a href="index.html#nossa-historia">NOSSA HISTÓRIA</a></li>
-          <li><a href="index.html#detalhes-do-evento">DETALHES DO EVENTO</a></li>
-          <li><a href="rvsp.html">CONFIRMAR PRESENÇA</a></li>
-          <li><a href="presentes.html">LISTA DE PRESENTES</a></li>
-          <li><a href="galeria.html">GALERIA</a></li>
-        </ul>
-      </nav>
+        <nav id="main-nav" class="nav-menu">
+            <ul>
+                <li><a href="index.html">INÍCIO</a></li>
+                <li><a href="index.html#nossa-historia">NOSSA HISTÓRIA</a></li>
+                <li><a href="index.html#detalhes-do-evento">DETALHES DO EVENTO</a></li>
+                <li><a href="rvsp.html">CONFIRMAR PRESENÇA</a></li>
+                <li><a href="presentes.html" class="active">LISTA DE PRESENTES</a></li>
+                <li><a href="index.html#galeria">GALERIA</a></li>
+            </ul>
+        </nav>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Abrir menu" aria-controls="fullscreenMenu" aria-expanded="false">
+            <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+        </button>
+    </div>
   </header>
+
+  <!-- fullscreen menu (coloque logo/menu duplicado aqui, após o header) -->
+  <div id="fullscreenMenu" class="fullscreen-menu" aria-hidden="true" role="dialog" aria-modal="true">
+    <nav class="fullscreen-nav">
+        <ul>
+            <li><a href="index.html">INÍCIO</a></li>
+            <li><a href="index.html#nossa-historia">NOSSA HISTÓRIA</a></li>
+            <li><a href="index.html#detalhes-do-evento">DETALHES DO EVENTO</a></li>
+            <li><a href="rvsp.html">CONFIRMAR PRESENÇA</a></li>
+            <li><a href="presentes.html" class="active">LISTA DE PRESENTES</a></li>
+            <li><a href="index.html#galeria">GALERIA</a></li>
+        </ul>
+    </nav>
+  </div>
 
   <main class="content-section gifts-page">
     <div class="container">
@@ -395,6 +412,46 @@
       </div>
   </div>
 
-  <script src="script.js"></script>
+  <script src="script.js">
+    // script.js — VERSÃO FINAL E INDESTRUTÍVEL (Isabela & João ♥)
+    document.addEventListener("DOMContentLoaded", function () {
+    const hamburgerBtn = document.getElementById("hamburgerBtn");
+    const fullscreenMenu = document.getElementById("fullscreenMenu");
+
+    // Se a página não tiver o menu (ex: página antiga), simplesmente ignora sem dar erro
+    if (!hamburgerBtn || !fullscreenMenu) return;
+
+    const openMenu = () => {
+        hamburgerBtn.classList.add("active");
+        fullscreenMenu.classList.add("active");
+        document.body.style.overflow = "hidden";
+        hamburgerBtn.setAttribute("aria-expanded", "true");
+    };
+
+    const closeMenu = () => {
+        hamburgerBtn.classList.remove("active");
+        fullscreenMenu.classList.remove("active");
+        document.body.style.overflow = "";
+        hamburgerBtn.setAttribute("aria-expanded", "false");
+    };
+
+    hamburgerBtn.addEventListener("click", () => {
+        fullscreenMenu.classList.contains("active") ? closeMenu() : openMenu();
+    });
+
+    document.querySelectorAll(".fullscreen-nav a").forEach(link => {
+        link.addEventListener("click", closeMenu);
+    });
+
+    fullscreenMenu.addEventListener("click", e => {
+        if (e.target === fullscreenMenu) closeMenu();
+    });
+
+    // Fecha com a tecla ESC (bônus)
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && fullscreenMenu.classList.contains("active")) closeMenu();
+    });
+});
+  </script>
 </body>
 </html>

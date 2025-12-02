@@ -1,4 +1,3 @@
-
 /* Configurações Globais e Reset */
 body {
     font-family: 'Montserrat', sans-serif; 
@@ -73,7 +72,7 @@ html {
     font-weight: 400;
     display: flex;
     align-items: center;
-    padding: 3px 0;
+    padding: 0 0;
     position: relative;
     font-family: 'Montserrat', serif; 
     letter-spacing: 1px;
@@ -1779,7 +1778,9 @@ html {
     /* Garante alinhamento vertical */
     display: flex;
     align-items: center;
-    margin-left: -70px;
+    margin-left: 0px;
+    position: relative;
+    width: auto;
 }
 
 /* 3. Ajustes de Cores */
@@ -1895,6 +1896,26 @@ html {
     .event-details-grid {
         gap: 20px;
     }
+
+    .rsvp-section {
+    min-height: 100vh !important; /* força a seção a ocupar toda a tela */
+    padding: 0 !important;        /* remove espaçamento interno que pode deixar “buracos” */
+  }
+
+  .rsvp-section::before {
+    content: "";
+    position: fixed !important;   /* fixa o fundo na tela inteira */
+    inset: 0;                     /* cobre toda a viewport */
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(2px);
+    z-index: 0;
+  }
+
+  /* garante que o conteúdo fique acima do fundo */
+  .rsvp-section > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 
@@ -2057,6 +2078,68 @@ html {
         max-height: 40px;
     }
 
+
+    .logo {
+        position: absolute !important;
+        left: 10px !important;
+        top: 5px !important;
+    }
+
+    .transition-divider {
+        margin-top: -55px !important;   /* reduz o deslocamento vertical */
+        margin-bottom: -10px !important;
+        overflow: visible !important;   /* evita cortes da nuvem */
+    }
+
+    .transition-divider img {
+        display: block;
+        margin: 0 auto;                 /* centraliza horizontalmente */
+        max-width: 100%;                /* garante que não estique além da tela */
+        height: auto;
+    }
+
+    .rsvp-section {
+        min-height: 100vh !important; /* força a seção a ocupar toda a tela */
+        padding: 0 !important;        /* remove espaçamento interno que pode deixar “buracos” */
+    }
+
+    .rsvp-section::before {
+        content: "";
+        position: fixed !important;   /* fixa o fundo na tela inteira */
+        inset: 0;                     /* cobre toda a viewport */
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+    }
+
+    /* garante que o conteúdo fique acima do fundo */
+    .rsvp-section > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hamburger {
+        display: block; /* aparece só no mobile */
+    }
+    
+      /* Esconde o menu padrão */
+      .nav-menu {
+        display: none;
+    }
+
+    .fullscreen-menu {
+    position: fixed;
+    inset: 0;
+    background: #000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .fullscreen-menu.active {
+    display: flex;
+  }
 }
 
 /* --- MOBILE EXTREMO (Max-width 480px) --- */
@@ -2084,5 +2167,170 @@ html {
     .site-logo {
         max-height: 35px; /* Reduz um pouco mais em telas muito pequenas */
     }
+
+    .logo {
+        position: absolute !important;
+        left: 10px !important;
+        top: 5px !important;
+    }
+
+    .transition-divider {
+        margin-top: -55px !important;   /* reduz o deslocamento vertical */
+        margin-bottom: -10px !important;
+        overflow: visible !important;   /* evita cortes da nuvem */
+    }
+
+    .transition-divider img {
+        display: block;
+        margin: 0 auto;                 /* centraliza horizontalmente */
+        max-width: 100%;                /* garante que não estique além da tela */
+        height: auto;
+    }
+
+    .rsvp-section {
+        min-height: 100vh !important; /* força a seção a ocupar toda a tela */
+        padding: 0 !important;        /* remove espaçamento interno que pode deixar “buracos” */
+    }
+
+    .rsvp-section::before {
+        content: "";
+        position: fixed !important;   /* fixa o fundo na tela inteira */
+        inset: 0;                     /* cobre toda a viewport */
+        background: rgba(0, 0, 0, 0.35);
+        backdrop-filter: blur(2px);
+        z-index: 0;
+    }
+
+    /* garante que o conteúdo fique acima do fundo */
+    .rsvp-section > * {
+        position: relative;
+        z-index: 1;
+    }
+}
+/* ============= MENU HAMBURGUER + FULLSCREEN - VERSÃO FINAL CASAMENTO ISABELA & JOÃO */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    z-index: 1001;
 }
 
+.hamburger-box {
+    width: 32px;
+    height: 24px;
+    display: block;
+    position: relative;
+}
+
+.hamburger-inner,
+.hamburger-inner::before,
+.hamburger-inner::after {
+    width: 32px;
+    height: 3px;
+    background-color: #d4a9b3; /* rosê delicado */
+    border-radius: 4px;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+.hamburger-inner { top: 50%; transform: translateY(-50%); }
+.hamburger-inner::before { content: ""; top: -10px; }
+.hamburger-inner::after  { content: ""; top: 10px; }
+
+/* Virar X quando abrir */
+.hamburger.active .hamburger-inner {
+    background: transparent;
+}
+.hamburger.active .hamburger-inner::before {
+    transform: translateY(10px) rotate(45deg);
+    background-color: #fff;
+}
+.hamburger.active .hamburger-inner::after {
+    transform: translateY(-10px) rotate(-45deg);
+    background-color: #fff;
+}
+
+/* FULLSCREEN MENU */
+#fullscreenMenu {
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(135deg, #fdf6f8 0%, #f8e1e7 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s;
+    z-index: 1000;
+    backdrop-filter: blur(12px);
+}
+
+#fullscreenMenu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.fullscreen-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    text-align: center;
+}
+
+.fullscreen-nav li {
+    margin: 22px 0;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+#fullscreenMenu.active li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#fullscreenMenu.active li:nth-child(1) { transition-delay: 0.1s; }
+#fullscreenMenu.active li:nth-child(2) { transition-delay: 0.2s; }
+#fullscreenMenu.active li:nth-child(3) { transition-delay: 0.3s; }
+#fullscreenMenu.active li:nth-child(4) { transition-delay: 0.4s; }
+#fullscreenMenu.active li:nth-child(5) { transition-delay: 0.5s; }
+#fullscreenMenu.active li:nth-child(6) { transition-delay: 0.6s; }
+
+.fullscreen-nav a {
+    color: #b86d7f;
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.fullscreen-nav a:hover,
+.fullscreen-nav a.active {
+    color: #d4a9b3;
+}
+
+/* Responsivo */
+@media (max-width: 968px) {
+    .hamburger {
+        display: block;
+    }
+    
+    /* Esconde o menu horizontal normal no mobile */
+    #main-nav {
+        display: none !important;
+    }
+    
+    /* Garante que o header fique bonito no mobile */
+    #main-header .container {
+        justify-content: space-between;
+    }
+}
+
+@media (min-width: 969px) {
+    #fullscreenMenu {
+        display: none !important;
+    }
+}
